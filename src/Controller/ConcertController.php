@@ -34,6 +34,27 @@ class ConcertController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/archive", name="last_concert")
+     */
+    public function past(): Response
+    {
+        $allConcerts = $this->getDoctrine()->getRepository(Concert::class)->findAll();
+        $nextConcerts = array();
+
+        $currentDate = new DateTime('now');
+
+        foreach($allConcerts as $concert){
+            if($concert->getDate()< $currentDate){
+                $pastConcerts[$concert->getDate()->format("Y")][]=$concert;
+            }
+        }
+
+        return $this->render('concert/archive.html.twig', [
+            'concerts' => $pastConcerts,
+        ]);
+    }
+
 
     /**
      * Affiche une liste de concerts
