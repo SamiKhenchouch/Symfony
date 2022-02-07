@@ -21,6 +21,14 @@ class ConcertFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->persist($c);
 
+        $c2 = new Concert();
+        $c2->setDate(\DateTime::createFromFormat("d/m/Y",'03/09/2020'))
+          ->setTourName('The Tour')
+          ->setHall($this->getReference(HallFixtures::ROOM_2))
+          ->addBand($this->getReference(BandFixtures::BAND_1));
+
+        $manager->persist($c2);
+        
         $manager->flush();
 
     
