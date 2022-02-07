@@ -1,0 +1,41 @@
+{# concert/list.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="container">
+    <table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Groupe</th>
+        <th scope="col">Tournée</th>
+        <th scope="col">Date</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for concert in concerts %}
+        <tr>
+            {% for band in concert.bands %}
+                <td href="{{ path('band_show', {id: band.id}) }}">{{ band.name }}</td>
+
+            <td>{{ concert.tourName }}</td>
+            <td>{{ concert.date|date('d-m-Y') }}</td>
+            <td>
+                <a href="{{ path('concert_edit', {id: concert.id}) }}"
+                   role="button" class="btn btn-primary">Mettre à jour</a>
+                <a href="{{ path('concert_delete', {id: concert.id}) }}"
+                   role="button" class="btn btn-danger">Supprimer</a>
+
+            </td>
+            {% endfor %}
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    <div>
+        <a href="{{ path('concert_create') }}">
+            Créer un nouveau concert</a>
+    </div>
+</div>
+{% endblock %}

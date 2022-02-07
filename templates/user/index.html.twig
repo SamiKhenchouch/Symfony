@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil {{app.user.firstName}}!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+{% for message in app.flashes('message') %}
+    <div class="alert alert-success" role="alert">
+    {{message}}
+    </div>
+{% endfor %}
+
+    {{app.user.firstName}}
+    {{app.user.lastName}}
+</div>
+
+{% endblock %}

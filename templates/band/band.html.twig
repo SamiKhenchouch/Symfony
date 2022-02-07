@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+    <h1>Le groupe {{ band.name }} </h1>
+        <p>Composé de {{ band.members|length }} membres, qui sont :</p>
+
+    <div class="container">
+
+        <div class="card-deck">
+        {% for member in band.members %}
+            <div class="card">
+                <img src="{{ asset('images/'~ member.picture) }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ member.name }} {{ member.firstname }}</h5>
+                    <p class="card-text">Né le {{ member.birthDate|date('d-m-Y') }}.</p>
+                </div>
+                <div class="card-footer"><small class="text-muted">{{ member.job }}</small>
+                </div>
+            </div>
+        {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

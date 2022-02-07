@@ -1,0 +1,30 @@
+{# concert/list.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="container">
+    <table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Groupe</th>
+        <th scope="col">Tournée</th>
+        <th scope="col">Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for concert in concerts %}
+        <tr>
+            {% for band in concert.bands %}
+                <td href="{{ path('band_show', {id: band.id}) }}">{{ band.name }}</td>
+
+            <td>{{ concert.tourName }}</td>
+            <td>{{ concert.date|date('d-m-Y') }}</td>
+           
+            {% endfor %}
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
